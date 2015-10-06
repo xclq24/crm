@@ -1,0 +1,34 @@
+package com.tarena.crm.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.tarena.crm.entity.User;
+import com.tarena.crm.service.UserService;
+import com.tarena.crm.service.impl.UserServiceImpl;
+import com.tarena.minispringmvc.servlet.Action;
+import com.tarena.minispringmvc.servlet.EntityUtil;
+import com.tarena.minispringmvc.servlet.RequestPath;
+
+@Action
+public class UserAction {
+	// 路径分析在框架内进行
+	@RequestPath(path = "/user/login.do")
+	public void login(HttpServletRequest request, HttpServletResponse response) {
+		User loginUser = null;
+		try {
+			User user = (User) EntityUtil
+					.getObject(request, User.class, "user");
+			UserService userService = new UserServiceImpl();
+			loginUser = userService.login(user);
+			if (loginUser == null) {
+				response.sendRedirect("/crm/login.do");
+			} else {
+				request.getSession().setAttribute("loginUser", loginUser);
+				response.sendRedirect("/crm/main.do");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

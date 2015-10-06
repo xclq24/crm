@@ -1,0 +1,75 @@
+package com.tarena.crm.action;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.tarena.crm.entity.Notice;
+import com.tarena.crm.entity.User;
+import com.tarena.crm.service.impl.NoticeServiceImpl;
+import com.tarena.db.PageModel;
+import com.tarena.minispringmvc.servlet.Action;
+import com.tarena.minispringmvc.servlet.RequestPath;
+
+@Action
+public class NoticeAction {
+	@RequestPath(path = "/page/basis/noticeList.do")
+	public void noticeList(HttpServletRequest request,HttpServletResponse response){
+		try {
+			List<Notice> noticeList = new NoticeServiceImpl().findAll();
+			request.setAttribute("noticeList", noticeList);
+			
+			PageModel<Notice> pm = new PageModel<Notice>();
+			pm.setList(noticeList);
+			request.setAttribute("pm", pm);
+			
+			request.getRequestDispatcher("/page/basis/noticeList.jsp").forward(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestPath(path = "/page/basis/noticeAdd.do")
+	public void noticeAdd(HttpServletRequest request,HttpServletResponse response){
+		try {
+			String name = ((User)request.getSession().getAttribute("loginUser")).getName();
+			String theme = request.getParameter("theme");
+			String deadline = request.getParameter("deadline");
+			String message = request.getParameter("message");
+			Notice notice = new Notice();
+			notice.setName(name);
+			notice.setTheme(theme);
+			notice.setTime(new Date());
+			
+			notice.setDeadline(new SimpleDateFormat("yyyy-MM-dd,HH:mm:ss").parse(deadline));
+			notice.setMessage(message);
+			new NoticeServiceImpl().add(notice);
+			
+			request.getRequestDispatcher("/page/basis/noticeList.do").forward(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@RequestPath(path = "/page/basis/queryNoticeList.do")
+	public void queryNoticeList(HttpServletRequest request,HttpServletResponse response){
+		try {
+			String classify = request.getParameter("classify");
+			String keyword = request.getParameter("keyword");
+			
+			List<Notice> noticeList = new NoticeServiceImpl().queryNoticeList(classify, keyword);
+			request.setAttribute("noticeList", noticeList);
+			
+			request.getRequestDispatcher("/page/basis/noticeList.jsp").forward(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

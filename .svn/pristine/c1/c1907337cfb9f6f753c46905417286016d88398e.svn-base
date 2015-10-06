@@ -1,0 +1,111 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<strong class="am-text-primary am-text-lg">客户分配</strong>&nbsp;/&nbsp;<small>客户相关</small>
+<hr/>
+<form class="am-form am-form-inline" role="form">
+	<div class="am-form-group am-form-select am-u-sm-2">
+	    <select class="am-input-sm">
+	    	<option value="option1">张三</option>
+	    </select>
+  	</div>
+  	<a class="am-btn am-btn-warning am-btn-sm" href="#">
+		分配
+	</a>
+</form>
+<br/>
+<div class="am-scrollable-horizontal">
+	<table class="am-table am-table-compact am-table-striped am-table-hover am-text-nowrap">
+		<thead>
+			<tr>
+				<th><input type="checkbox"></th>
+				<th>姓名</th>
+				<th>状态</th>
+				<th>来源</th>
+				<th>类型</th>
+				<th>创建时间</th>
+				<th>公司</th>
+				<th>备注</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>李四</td>
+				<td>潜在客户</td>
+				<td>自己上门</td>
+				<td>客户</td>
+				<td>2015-08-23 18:23</td>
+				<td>思科</td>
+				<td>小鲜肉</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>李四</td>
+				<td>潜在客户</td>
+				<td>自己上门</td>
+				<td>客户</td>
+				<td>2015-08-23 18:23</td>
+				<td>思科</td>
+				<td>小鲜肉</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>李四</td>
+				<td>潜在客户</td>
+				<td>自己上门</td>
+				<td>客户</td>
+				<td>2015-08-23 18:23</td>
+				<td>思科</td>
+				<td>小鲜肉</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>李四</td>
+				<td>潜在客户</td>
+				<td>自己上门</td>
+				<td>客户</td>
+				<td>2015-08-23 18:23</td>
+				<td>思科</td>
+				<td>小鲜肉</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>李四</td>
+				<td>潜在客户</td>
+				<td>自己上门</td>
+				<td>客户</td>
+				<td>2015-08-23 18:23</td>
+				<td>思科</td>
+				<td>小鲜肉</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>李四</td>
+				<td>潜在客户</td>
+				<td>自己上门</td>
+				<td>客户</td>
+				<td>2015-08-23 18:23</td>
+				<td>思科</td>
+				<td>小鲜肉</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>李四</td>
+				<td>潜在客户</td>
+				<td>自己上门</td>
+				<td>客户</td>
+				<td>2015-08-23 18:23</td>
+				<td>思科</td>
+				<td>小鲜肉</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<ul class="am-pagination am-pagination-right">
+	<li class="am-disabled"><a href="#">&laquo;</a></li>
+	<li class="am-active"><a href="#">1</a></li>
+	<li><a href="#">2</a></li>
+	<li><a href="#">3</a></li>
+	<li><a href="#">4</a></li>
+	<li><a href="#">5</a></li>
+	<li><a href="#">&raquo;</a></li>
+</ul>

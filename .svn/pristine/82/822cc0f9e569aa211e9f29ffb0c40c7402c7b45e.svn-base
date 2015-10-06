@@ -1,0 +1,15 @@
+package com.tarena.crm.service;
+
+import java.util.List;
+
+import com.tarena.crm.entity.Notice;
+
+public interface NoticeService {
+	public List<Notice> findAll() throws Exception;
+	
+	public List<Notice> findAllValidate() throws Exception;
+	
+	public void add(Notice notice) throws Exception;
+	
+	public List<Notice> queryNoticeList(String classify,String keyword) throws Exception;
+}

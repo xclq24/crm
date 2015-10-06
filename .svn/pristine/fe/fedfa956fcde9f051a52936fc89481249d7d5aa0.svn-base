@@ -1,0 +1,111 @@
+package com.tarena.crm.action;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.tarena.crm.entity.Customer;
+import com.tarena.crm.entity.Record;
+import com.tarena.crm.service.CustomerService;
+import com.tarena.crm.service.RecordService;
+import com.tarena.crm.service.impl.CustomerServiceImpl;
+import com.tarena.crm.service.impl.RecordServiceImpl;
+import com.tarena.minispringmvc.servlet.Action;
+import com.tarena.minispringmvc.servlet.EntityUtil;
+import com.tarena.minispringmvc.servlet.RequestPath;
+
+@Action
+public class RecordAction {
+
+	//联系记录展示
+	@RequestPath(path = "/page/customer/recordList.do")
+	public void list(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		List<Record> records = null;
+		
+		//搜索路径转发
+		if(request.getAttribute("records") != null){
+			records = (List<Record>) request.getAttribute("records");
+		}else{
+		
+			RecordService recordService = new RecordServiceImpl();
+			records = recordService.recordList();
+		}
+		request.setAttribute("records", records);
+		request.getRequestDispatcher("/page/customer/recordList.jsp")
+				.forward(request, response);
+		return;
+	}
+
+	//联系记录信息
+	@RequestPath(path = "/page/customer/recordDel.do")
+	public void delete(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		response.setContentType("text/html;charset=utf-8");
+		String id = request.getParameter("id");
+		RecordService recordService = new RecordServiceImpl();
+		recordService.recordDel(id);
+		request.getRequestDispatcher("/page/customer/recordList.do").forward(
+				request, response);
+		return;
+
+	}
+	
+	//联系记录搜索
+	@RequestPath(path = "/page/customer/recordSearch.do")
+	public void search(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		String name = request.getParameter("name");
+
+		RecordService recordService = new RecordServiceImpl();
+		List<Record> records = recordService.recordSearch(name);
+
+		request.setAttribute("records", records);
+		request.getRequestDispatcher("/page/customer/recordList.do").forward(
+				request, response);
+		return;
+
+	}
+	
+	//进入记录添加
+	@RequestPath(path = "/page/customer/recordAdd1.do")
+	public void add1(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		CustomerService customerService = new CustomerServiceImpl();
+		List<Customer> customers = customerService.customerList();
+		
+		request.setAttribute("customers", customers);
+		
+		request.getRequestDispatcher("/page/customer/recordAdd.jsp").forward(request,response);
+		return;
+	}
+	
+	//联系记录添加
+	@RequestPath(path = "/page/customer/recordAdd2.do")
+	public void add2(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		Record record = (Record) EntityUtil.getObject(request, Record.class, "record");
+		String time = request.getParameter("time");
+		record.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(time));
+		String next = request.getParameter("next");
+		record.setNext(new SimpleDateFormat("yyyy-MM-dd").parse(next));
+		RecordService recordService = new RecordServiceImpl();
+		recordService.recordAdd(record);
+		
+		response.getWriter().println("/crm/page/customer/recordList.do");
+		return;
+	}
+}

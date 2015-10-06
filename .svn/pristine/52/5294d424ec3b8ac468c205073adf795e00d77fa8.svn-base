@@ -1,0 +1,15 @@
+package com.tarena.crm.dao;
+
+import java.util.List;
+
+import com.tarena.crm.entity.Type;
+
+public interface TypeDao {
+	public void save(Type type) throws Exception;
+
+	public List<Type> findAll() throws Exception;
+
+	public void deleteById(int id) throws Exception;
+
+	public Type findByTypeName(String type) throws Exception;
+}

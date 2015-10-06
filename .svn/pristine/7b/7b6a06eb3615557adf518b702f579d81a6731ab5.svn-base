@@ -1,0 +1,45 @@
+DROP DATABASE IF EXISTS db_crm;
+CREATE DATABASE db_crm CHARSET utf8;
+USE db_crm;
+
+DROP TABLE IF EXISTS customer;
+CREATE TABLE cunstomer (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(20) NOT NULL,
+	source VARCHAR(20) NOT NULL,
+	position VARCHAR(20),
+	type VARCHAR(20) NOT NULL,
+	gender CHAR NOT NULL,
+	email VARCHAR(20),
+	birthday DATE NOT NULL,
+	phone VARCHAR(20) NOT NULL,
+	qq VARCHAR(20),
+	addr VARCHAR(20),
+	weibo VARCHAR(20),
+	tel VARCHAR(20),
+	msn VARCHAR(20),
+	company VARCHAR(20),
+	builder VARCHAR(20) NOT NULL,
+	modifier VARCHAR(20) NOT NULL,
+	state VARCHAR(20) NOT NULL,
+	note VARCHAR(20)
+)charset=utf8;
+
+DROP TABLE IF EXISTS allot;
+CREATE TABLE allot(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	ename VARCHAR(20) NOT NULL,
+	cname VARCHAR(20) NOT NULL,
+	time DATETIME NOT NULL
+)charset=utf8;
+
+DROP TABLE IF EXISTS record;
+CREATE TABLE record(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(20),
+	type VARCHAR(20),
+	next DATE,
+	contacter VARCHAR(20) NOT NULL,
+	theme VARCHAR(20),
+	note VARCHAR(100)
+)charset=utf8;

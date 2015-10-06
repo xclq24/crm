@@ -1,0 +1,66 @@
+package com.tarena.crm.dao.impl;
+
+import java.sql.ResultSet;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.tarena.crm.dao.AllotDao;
+import com.tarena.crm.entity.Allot;
+import com.tarena.crm.entity.Customer;
+import com.tarena.db.BaseDao;
+import com.tarena.db.EntityUtils;
+
+public class AllotDaoImpl extends BaseDao<Allot> implements AllotDao{
+	@Override
+	public Allot toEntity(ResultSet rs) throws Exception {
+		Allot allot = new Allot();
+		EntityUtils.fillEntity(rs, allot);
+		return allot;
+	}
+	@Override
+	public void save(Allot allot) throws Exception {
+		update("insert into allot values(null,?,?,?)"
+				, allot.toArray());
+	}
+
+	@Override
+	public void deleteById(int id) throws Exception {
+		update("delete from allot where id = ?", new Object[]{ id });
+	}
+
+	@Override
+	public List<Allot> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return queryEntity("select * from allot", null);
+	}
+
+	@Override
+	public void update(Allot allot) throws Exception {
+		Object[] params = allot.toArray();
+		params = ArrayUtils.add(params, allot.getId());
+		update(
+				"update allot set ename=?,cname=?,time=? where id=?",
+				params);
+	}
+
+	@Override
+	public Allot findById(int id) throws Exception {
+		List<Allot> list = queryEntity("select * from allot where id = ?",
+				new Object[] { id });
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public Allot findByEname(String ename) throws Exception {
+		List<Allot> list = queryEntity("select * from allot where ename = ?",
+				new Object[] {ename});
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+}

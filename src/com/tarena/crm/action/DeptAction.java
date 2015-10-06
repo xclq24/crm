@@ -1,0 +1,69 @@
+package com.tarena.crm.action;
+
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSONArray;
+import com.tarena.crm.entity.Dept;
+import com.tarena.crm.entity.User;
+import com.tarena.crm.service.DeptService;
+import com.tarena.crm.service.impl.DeptServiceImpl;
+import com.tarena.minispringmvc.servlet.Action;
+import com.tarena.minispringmvc.servlet.EntityUtil;
+import com.tarena.minispringmvc.servlet.RequestPath;
+
+@Action
+public class DeptAction {
+	@RequestPath(path = "/page/basis/deptList.do")
+	public void deptList(HttpServletRequest request, HttpServletResponse response){
+		List<Dept> depts = null;
+		try{
+			DeptService deptService = new DeptServiceImpl();
+			depts = deptService.DeptList();
+			request.setAttribute("depts", depts);
+			request.getRequestDispatcher("deptList.jsp").forward(request, response);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@RequestPath(path = "/page/basis/addDept.do")
+	public void addDept(HttpServletRequest request, HttpServletResponse response){
+		try{
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset=utf-8");
+			Dept dept = (Dept) EntityUtil
+					.getObject(request, Dept.class, "dept");
+			System.out.println(dept);
+			DeptService deptService = new DeptServiceImpl();
+			Dept a = deptService.FindByName(dept.getName());
+			if(a==null){
+				deptService.addDept(dept);
+				System.out.println("成功");
+				response.sendRedirect("/crm/main.do");
+			}else{
+				System.out.println("失败");
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@RequestPath(path = "/page/basis/findDept.do")
+	public void findDept(HttpServletRequest request, HttpServletResponse response){
+		try{
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			String name = request.getParameter("name");
+			DeptService deptService = new DeptServiceImpl();
+			List<Dept> depts = deptService.findByText(name);
+			JSONArray json = (JSONArray) JSONArray.toJSON(depts);
+			String jsonStr = json.toString();
+			out.println(jsonStr);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

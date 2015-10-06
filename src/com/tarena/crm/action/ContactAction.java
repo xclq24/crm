@@ -1,0 +1,145 @@
+package com.tarena.crm.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.tarena.crm.entity.Contact;
+import com.tarena.crm.entity.Customer;
+import com.tarena.crm.service.ContactService;
+import com.tarena.crm.service.CustomerService;
+import com.tarena.crm.service.impl.ContactServiceImpl;
+import com.tarena.crm.service.impl.CustomerServiceImpl;
+import com.tarena.minispringmvc.servlet.Action;
+import com.tarena.minispringmvc.servlet.EntityUtil;
+import com.tarena.minispringmvc.servlet.RequestPath;
+
+@Action
+public class ContactAction {
+
+	//联系人显示
+	@RequestPath(path = "/page/customer/contactList.do")
+	public void list(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		List<Contact> contacts = null;
+		
+		//搜索路径转发
+		if(request.getAttribute("contacts") != null){
+			contacts = (List<Contact>) request.getAttribute("contacts");
+		}else{
+		
+			ContactService contactService = new ContactServiceImpl();
+			contacts = contactService.contactList();
+		}
+		request.setAttribute("contacts", contacts);
+		request.getRequestDispatcher("/page/customer/contactList.jsp")
+				.forward(request, response);
+	}
+
+	//删除联系人信息
+	@RequestPath(path = "/page/customer/contactDel.do")
+	public void delete(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+
+		response.setContentType("text/html;charset=utf-8");
+		String id = request.getParameter("id");
+		ContactService contactService = new ContactServiceImpl();
+
+		contactService.contactDel(id);
+		request.getRequestDispatcher("/page/customer/contactList.do").forward(
+				request, response);
+		return;
+
+	}
+	
+	//联系人信息搜索
+	@RequestPath(path = "/page/customer/contactSearch.do")
+	public void search(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		String name = request.getParameter("name");
+		
+		ContactService contactService = new ContactServiceImpl();
+		List<Contact> contacts = contactService.contactSearch(name);
+		
+		request.setAttribute("contacts", contacts);
+		request.getRequestDispatcher("/page/customer/contactList.do").forward(
+				request, response);
+		return;
+
+	}
+	
+	//进入联系人编辑
+	@RequestPath(path = "/page/customer/contactEdit1.do")
+	public void edit1(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		String id = request.getParameter("id");
+		///取得要编辑的联系人
+		ContactService contactService = new ContactServiceImpl();
+		Contact contact = contactService.contactSearchById(id);
+		//获得所有客户
+		CustomerService customerService = new CustomerServiceImpl();
+		List<Customer> customers = customerService.customerList();
+		
+		request.setAttribute("customers", customers);
+		request.setAttribute("contact", contact);
+		
+		request.getRequestDispatcher("/page/customer/contactEdit.jsp").forward(
+				request, response);
+		return;
+	}
+	
+	//联系人编辑添加
+	@RequestPath(path = "/page/customer/contactEdit2.do")
+	public void edit2(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		Contact contact = (Contact) EntityUtil.getObject(request, Contact.class, "contact");
+		
+		ContactService contactService = new ContactServiceImpl();
+		contactService.contactEdit(contact);
+		
+		response.getWriter().println("/crm/page/customer/contactList.do");
+		return;
+	}
+	
+	//进入联系人添加
+	@RequestPath(path = "/page/customer/contactAdd1.do")
+	public void add1(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		CustomerService customerService = new CustomerServiceImpl();
+		List<Customer> customers = customerService.customerList();
+		
+		request.setAttribute("customers", customers);
+		request.getRequestDispatcher("/page/customer/contactAdd.jsp")
+				.forward(request, response);
+		return;
+	}
+	
+	//联系人添加
+	@RequestPath(path = "/page/customer/contactAdd2.do")
+	public void add2(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		
+		Contact contact = (Contact) EntityUtil.getObject(request, Contact.class, "contact");
+		
+		ContactService contactService = new ContactServiceImpl();
+		contactService.contactAdd(contact);
+		
+		response.getWriter().println("/crm/page/customer/contactList.do");
+		return;
+	}
+}

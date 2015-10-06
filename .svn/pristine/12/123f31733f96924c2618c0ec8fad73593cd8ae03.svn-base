@@ -1,0 +1,57 @@
+package com.tarena.crm.entity;
+
+public class House {
+	private int id;
+	private String type;
+	private String manager;
+	private String address;
+	private double price;
+	private String enviroment;
+	
+	public Object[] toArray() {
+		return new Object[]{ type, manager, address, price, enviroment };
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
+	public String getManager() {
+		return manager;
+	}
+	public void setManager(String manager) {
+		this.manager = manager;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
+	
+	public String getEnviroment() {
+		return enviroment;
+	}
+	public void setEnviroment(String enviroment) {
+		this.enviroment = enviroment;
+	}
+	
+}

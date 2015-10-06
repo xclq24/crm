@@ -1,0 +1,68 @@
+package com.tarena.crm.test;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import org.junit.Test;
+
+import com.tarena.crm.dao.impl.ContactDaoImpl;
+import com.tarena.crm.entity.Care;
+import com.tarena.crm.entity.Contact;
+
+public class ContactDaoTest {
+	private ContactDaoImpl test = new ContactDaoImpl();
+
+	@Test
+	public void testSave() throws Exception {
+		Contact c = test.findByContactName("联系人1");
+		c.setCustomer("你大爷");
+		try {
+			test.save(c);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testFindAll() {
+		try {
+			List<Contact> list = test.findAll();
+			for (Contact s : list) {
+				System.out.println(s.getCustomer());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testDelete() {
+		try {
+			test.deleteById(2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void testFind() {
+		try {
+			Contact contact = test.findByContactName("联系人1");
+			System.out.println(contact.getCustomer());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testUpdate() throws Exception{
+		Contact contact = test.findByContactName("联系人1");
+		contact.setPosition("待业");
+		test.update(contact);
+	}
+}

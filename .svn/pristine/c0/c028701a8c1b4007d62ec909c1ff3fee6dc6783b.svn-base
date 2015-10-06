@@ -1,0 +1,28 @@
+package com.tarena.crm.action;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.tarena.minispringmvc.servlet.Action;
+import com.tarena.minispringmvc.servlet.RequestPath;
+
+@Action
+public class BaseAction {
+	@RequestPath(path = "/login.do")
+	public String toLogin(HttpServletRequest request,
+			HttpServletResponse response) {
+		return "/page/login.jsp";
+	}
+
+	@RequestPath(path = "/main.do")
+	public String toMain(HttpServletRequest request,
+			HttpServletResponse response) {
+		String datetime = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new Date());
+		request.setAttribute("datetime", datetime);
+		return "/page/main.jsp";
+	}
+	
+}

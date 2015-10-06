@@ -1,0 +1,93 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<strong class="am-text-primary am-text-lg">客户信息</strong>&nbsp;/&nbsp;<small>客户相关</small>
+<hr/>
+<form class="am-form am-form-inline" role="form">
+	<div class="am-form-group am-u-sm-4">
+		<input type="text" class="am-form-field am-input-sm" placeholder="请输入关键字" name="name" id="name">
+	</div>
+	<div class="am-form-group am-form-select am-u-sm-2">
+	    <select class="am-input-sm">
+	    	<option value="option1">客户姓名</option>
+	    </select>
+  	</div>
+  	<a class="am-btn am-btn-warning am-btn-sm" href="javascript:link('${pageContext.request.contextPath}/page/customer/customerSearch.do?name='+$('#name').val());">
+		<i class="am-icon-search"></i>
+		搜索
+	</a>
+	<a class="am-btn am-btn-warning am-btn-sm" href="javascript:link('${pageContext.request.contextPath}/page/customer/customerAdd1.do');">
+		<i class="am-icon-plus"></i>
+		添加
+	</a>
+</form>
+<br/>
+<div class="am-scrollable-horizontal">
+	<table class="am-table am-table-compact am-table-striped am-table-hover am-text-nowrap">
+		<thead>
+			<tr>
+				<th>姓名</th>
+				<th>状态</th>
+				<th>来源</th>
+				<th>所属员工</th>
+				<th>类型</th>
+				<th>性别</th>
+				<th>手机</th>
+				<th>QQ</th>
+				<th>邮箱</th>
+				<th>职位</th>
+				<th>公司</th>
+				<th>备注</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		<c:forEach var="item" items="${customers }">
+			<tr>
+				<td>${item.name }</td>
+				<td>${item.state }</td>
+				<td>${item.source }</td>
+				<td>${empty item.ename?'无':item.ename }</td>
+				<td>${item.type }</td>
+				<td>${item.gender }</td>
+				<td>${item.phone }</td>
+				<td>${item.qq }</td>
+				<td>${item.email }</td>
+				<td>${item.position }</td>
+				<td>${item.company }</td>
+				<td>${item.note }</td>
+				<td>
+					<a href="javascript:link('${pageContext.request.contextPath}/page/customer/customerEdit1.do?id=${item.id }');">编辑</a>
+					<a href="javascript:link('${pageContext.request.contextPath}/page/customer/customerInfo.do?id=${item.id }');">详情</a>
+					<a href="javascript:link('${pageContext.request.contextPath}/page/customer/customerDel.do?id=${item.id }');">删除</a>
+				</td>
+			</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+</div>
+<ul class="am-pagination am-pagination-right">
+	<li>当前：</li>
+	<li class="am-active">
+		 <input type="text" id="jump" name="currentPage" value="${page.currentPage }" style="width:25px" /> / ${page.totalPage } 页
+	</li>
+	<li><input type="button" value="跳转" onclick="jump();"></li>
+	<li>
+		<c:choose>
+			<c:when test="${page.hasPrePage }"><a href="javascript:link('${pageContext.request.contextPath}/page/customer/customerList.do?currentPage=${page.currentPage-1 }');">&laquo;</a></c:when>
+			<c:otherwise><a>&laquo;</a></c:otherwise>	
+		</c:choose>
+	</li>
+	<li>
+		<c:choose>
+			<c:when test="${page.hasNextPage }"><a href="javascript:link('${pageContext.request.contextPath}/page/customer/customerList.do?currentPage=${page.currentPage+1 }');">&raquo;</a></c:when>
+			<c:otherwise><a>&raquo;</a></c:otherwise>	
+		</c:choose>
+	</li>
+</ul>
+<script type="text/javascript">
+	function jump(){
+		if($('#jump').val().trim() != ""){
+			javascript:link('${pageContext.request.contextPath}/page/customer/customerList.do?currentPage='+$('#jump').val());
+		}
+	}
+</script>

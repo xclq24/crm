@@ -1,0 +1,147 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<strong class="am-text-primary am-text-lg">用户资料</strong>&nbsp;/&nbsp;<small>个人信息</small>
+<script>
+	$(function(){
+		$('#modify').click(function(){
+			haha('/crm/page/basis/modifyEmployee.do');
+		});
+	});
+</script>
+<hr/>
+<form class="am-form am-form-horizontal">
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">姓名：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="user.name" disabled="disabled" type="text" value="${user.name }">
+		</div>
+		<label class="am-u-sm-2 am-form-label">年龄：</label>
+		<div class="am-u-sm-4">
+			<input name="user.age" class="am-form-field am-input-sm" type="number" value="${user.age }">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">性别：</label>
+		<div class="am-u-sm-4">
+			<label class="am-radio-inline">
+				<input type="radio" name="user.gender" value="男" <c:if test="${user.gender=='男'}">checked=""</c:if> >&nbsp;男
+			</label>
+			<label class="am-radio-inline">
+				<input type="radio" name="user.gender" value="女"<c:if test="${user.gender=='女'}">checked=""</c:if>>&nbsp;女
+			</label>
+		</div>
+		<label class="am-u-sm-2 am-form-label">民族：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="user.nation" type="text" value="${user.nation }">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">学历：</label>
+		<div class="am-u-sm-4">
+			<select name="user.education">
+				<option value="本科"
+				<c:if test="${user.education=='本科'}">selected="selected"</c:if>
+				>本科</option>
+				<option value="硕士"
+				<c:if test="${user.education=='硕士'}">selected="selected"</c:if>
+				>硕士</option>
+			</select>
+		</div>
+		<label class="am-u-sm-2 am-form-label">婚姻：</label>
+		<div class="am-u-sm-4">
+			<select name="user.marriage">
+				<option value="未婚" 
+				<c:if test="${user.marriage=='未婚'}">selected="selected"</c:if>
+				>未婚</option>
+				<option value="已婚"
+				<c:if test="${user.marriage=='已婚'}">selected="selected"</c:if>
+				>已婚</option>
+			</select>
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">部门：</label>
+		<div class="am-u-sm-4">
+			<select  name="user.dept" >
+				<c:forEach items="${depts}" var="e" varStatus="s">
+					<option value="${e.name}" 
+						<c:if test="${user.dept == e.name}">selected="selected"
+						</c:if>
+						>${e.name}</option>
+				</c:forEach>
+			</select>
+		</div>
+		<label class="am-u-sm-2 am-form-label">角色：</label>
+		<div class="am-u-sm-4">
+			<select disabled="disabled" name="user.role" >
+				<c:forEach items="${roles}" var="e">
+						<option value="${e.name}" 
+						<c:if test="${user.role == e.name}">selected="selected"
+						</c:if>
+						>${e.name}</option>
+				</c:forEach>
+			</select>
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">座机：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="user.tel" value="${user.tel }">
+		</div>
+		<label class="am-u-sm-2 am-form-label">爱好：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="user.hobby"  value="${user.hobby }">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">工资卡号：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="user.salaryIdcard" value="${user.salaryIdcard }">
+		</div>
+		<label class="am-u-sm-2 am-form-label">手机：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="user.phone" value="${user.phone}">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">身份证：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="user.idcard" value="${user.idcard}">
+		</div>
+		<label class="am-u-sm-2 am-form-label">添加时间：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="user.addtime" value="${user.addtime}" disabled="disabled">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">添加人：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="user.builder" value="${user.builder}" disabled="disabled">
+		</div>
+		<label class="am-u-sm-2 am-form-label">修改人：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="user.modifier" value="${user.modifier}">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">邮箱：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="user.email" type="email" value="${user.email}">
+		</div>
+		<label for="age" class="am-u-sm-2 am-form-label">住址：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm"name="user.address" type="text" value="${user.address}">
+			<input type="hidden" name="user.id" value="${user.id}">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<div class="am-u-sm-10 am-u-sm-offset-2">
+			<button type="button" class="am-btn am-btn-primary" id="modify">
+				确认
+			</button>
+			<button type="submit" class="am-btn am-btn-default">
+				返回
+			</button>
+		</div>
+	</div>
+</form>

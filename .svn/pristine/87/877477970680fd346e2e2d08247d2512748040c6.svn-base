@@ -1,0 +1,59 @@
+package com.tarena.crm.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.tarena.crm.entity.Customer;
+import com.tarena.crm.entity.User;
+import com.tarena.crm.service.AllotService;
+import com.tarena.crm.service.CustomerService;
+import com.tarena.crm.service.UserService;
+import com.tarena.crm.service.impl.AllotServiceImpl;
+import com.tarena.crm.service.impl.CustomerServiceImpl;
+import com.tarena.crm.service.impl.UserServiceImpl;
+import com.tarena.minispringmvc.servlet.Action;
+import com.tarena.minispringmvc.servlet.RequestPath;
+
+@Action
+public class AllotAction {
+	@RequestPath(path = "/page/customer/allotList.do")
+	public void list(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		
+		List<Customer> allots = null;
+		CustomerService customerService = new CustomerServiceImpl();
+		allots = customerService.allotList();
+
+		UserService userService = new UserServiceImpl();
+		List<User> users = userService.EmpList();
+		
+		request.setAttribute("allots", allots);
+		request.setAttribute("users", users);
+		request.getRequestDispatcher("/page/customer/allotList.jsp").forward(
+				request, response);
+		return ;
+	}
+	
+	@RequestPath(path = "/page/customer/allotAllot.do")
+	public void allot(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
+		String name = request.getParameter("name");
+		String[] names = request.getParameterValues("id");
+		System.out.println("员工"+name);
+		for(String customer : names){
+			System.out.println("员工"+customer);
+		}
+		AllotService allotService = new AllotServiceImpl();
+		allotService.allotUpdate(names, name);
+		
+		request.getRequestDispatcher("/page/customer/allotList.do").forward(
+				request, response);
+		return ;
+	}
+}

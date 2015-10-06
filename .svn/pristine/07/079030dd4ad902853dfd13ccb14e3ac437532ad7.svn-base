@@ -1,0 +1,134 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<strong class="am-text-primary am-text-lg">客户信息编辑</strong>&nbsp;/&nbsp;<small>客户信息</small>&nbsp;/&nbsp;<small>客户相关</small>
+<hr/>
+<form class="am-form am-form-horizontal">
+	<input type="hidden" name="customer.id" value="${customer.id }">
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">负责员工：</label>
+		<div class="am-u-sm-4">
+			<select name="customer.ename">
+				<option value="无">无</option>
+				<c:forEach var="item" items="${users }">
+					<option value="${item.name }" <c:if test="${customer.name == item.name }"> selected="seleted"</c:if>>
+						${item.name }
+					</option>
+				</c:forEach>
+			</select>
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户来源：</label>
+		<div class="am-u-sm-4">
+			<select name="customer.source">
+				<c:forEach var="item" items="${sources }">
+					<option value="${item.source }" <c:if test="${customer.source == item.source }"> selected="seleted"</c:if>>
+						${item.source }
+					</option>
+				</c:forEach>
+			</select>
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户姓名：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="customer.name" disabled="disabled" value="${customer.name }">
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户状态：</label>
+		<div class="am-u-sm-4">
+			<select name="customer.state">
+				<c:forEach var="item" items="${states }">
+					<option value="${item.state }" <c:if test="${item.state == customer.state }"> selected="seleted"</c:if>>
+						${item.state }
+					</option>
+				</c:forEach>
+			</select>
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">性别：</label>
+		<div class="am-u-sm-4">
+			<label class="am-radio-inline">
+					<input type="radio" name="customer.gender" value="男" <c:if test="${customer.gender == '男' }"> checked="checked" </c:if> >&nbsp;男
+			</label>
+			<label class="am-radio-inline">
+					<input type="radio" name="customer.gender" value="女" <c:if test="${customer.gender == '女' }"> checked="checked" </c:if> >&nbsp;女
+			</label>
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户类型：</label>
+		<div class="am-u-sm-4">
+			<select name="customer.type">
+				<c:forEach var="item" items="${types }">
+					<option value="${item.type }" <c:if test="${item.type == customer.type }"> selected="seleted"</c:if>>
+						${item.type }
+					</option>
+				</c:forEach>
+			</select>
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">出生日期：</label>
+		<div class="am-u-sm-4">
+			<input type="text" name="customer.birthday" disabled="disabled" value="<fmt:formatDate type="date" value="${customer.birthday }" pattern="yyyy-MM-dd"></fmt:formatDate>">
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户手机：</label>
+		<div class="am-u-sm-4">
+			<input type="text" name="customer.phone" value="${customer.phone }"> 
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户QQ：</label>
+		<div class="am-u-sm-4">
+			<input type="text" name="customer.qq" value="${customer.qq }">
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户地址：</label>
+		<div class="am-u-sm-4">
+			<input type="text" name="customer.addr" value="${customer.addr }">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户邮箱：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="customer.email" type="text" value="${customer.email }">
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户职位：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="customer.position" type="text" value="${customer.position }">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户微博：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="customer.weibo" type="text" value="${customer.weibo }">
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户座机：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="customer.tel" type="text" value="${customer.tel }">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户MSN：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="customer.msn" type="text" value="${customer.msn }">
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户公司：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="customer.company" type="text" value="${customer.company }">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">创建人：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="customer.builder" type="text" disabled="disabled" value="${customer.builder }">
+		</div>
+		<label class="am-u-sm-2 am-form-label">修改人：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" name="customer.modifier" type="text" value="${customer.modifier }">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<div class="am-u-sm-offset-2 am-u-sm-4">
+			<input type="button" class="am-btn am-btn-primary" value="提交" onclick="javascript:haha('${pageContext.request.contextPath}/page/customer/customerEdit2.do');" />
+			<input type="button" class="am-btn am-btn-default" value="返回" onclick="javascript:link('${pageContext.request.contextPath}/page/customer/customerList.do');" />
+		</div>
+	</div>
+</form>

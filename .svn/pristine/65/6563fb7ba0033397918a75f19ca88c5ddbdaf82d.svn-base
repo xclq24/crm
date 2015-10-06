@@ -1,0 +1,30 @@
+package com.tarena.crm.service.impl;
+
+import java.util.List;
+
+import com.tarena.crm.dao.impl.NoticeDaoImpl;
+import com.tarena.crm.entity.Notice;
+import com.tarena.crm.service.NoticeService;
+
+public class NoticeServiceImpl implements NoticeService{
+
+	@Override
+	public List<Notice> findAll() throws Exception {
+		// TODO Auto-generated method stub
+		return new NoticeDaoImpl().findAll();
+	}
+
+	@Override
+	public void add(Notice notice) throws Exception {
+		// TODO Auto-generated method stub
+		new NoticeDaoImpl().save(notice);
+	}
+
+	@Override
+	public List<Notice> queryNoticeList(String classify, String keyword)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return new NoticeDaoImpl().queryNoticeList(classify, keyword);
+	}
+
+}

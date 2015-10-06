@@ -1,0 +1,85 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<strong class="am-text-primary am-text-lg">客户分配</strong>&nbsp;/&nbsp;<small>客户相关</small>
+<hr/>
+<script type="text/javascript">
+function total(){
+	var obj = document.getElementsByName('id');
+	var total = document.getElementById('totalId');
+	if(total.checked){
+		for ( var i = 0; i < obj.length; i++) {
+			alert("被选中"+i);
+			$(obj[i]).prop("checked",true);
+		}
+	}else{
+		for ( var i = 0; i < obj.length; i++) {
+			alert("没被选中"+i);
+			$(obj[i]).prop("checked",false);
+		}
+	}
+}
+function calid() {
+	var value = new Array();
+	var obj = document.getElementsByName('id');
+	for ( var i = 0; i < obj.length; i++) {
+		if (obj[i].checked) {
+			value.push(obj[i].value);
+		}
+	}
+	return value.toString();
+}
+</script>
+<form class="am-form am-form-inline" role="form">
+	<div class="am-form-group am-form-select am-u-sm-2">
+	    <select class="am-input-sm" id="name">
+	    	<c:forEach var="item" items="${users }">
+	    		<option value="${item.name }">${item.name }</option>
+	    	</c:forEach>
+	    </select>
+  	</div>
+  	<a class="am-btn am-btn-warning am-btn-sm" 
+  	href="javascript:link('${pageContext.request.contextPath}/page/customer/allotAllot.do?name='+$('#name').val()+'&id='+calid());">
+		分配
+	</a>
+</form>
+<br/>
+<div class="am-scrollable-horizontal">
+	<table class="am-table am-table-compact am-table-striped am-table-hover am-text-nowrap">
+		<thead>
+			<tr>
+				<th><input type="checkbox" id="totalId" onclick="total();"></th>
+				<th>姓名</th>
+				<th>状态</th>
+				<th>来源</th>
+				<th>类型</th>
+				<th>创建时间</th>
+				<th>公司</th>
+				<th>备注</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="item" items="${allots }"> 
+			<tr>
+				<td><input type="checkbox" value="${item.name }" name="id"></td>
+				<td>${item.name }</td>
+				<td>${item.state }</td>
+				<td>${item.source }</td>
+				<td>${item.type }</td>
+				<td><fmt:formatDate type="date" value="${item.createtime }" pattern="yyyy-MM-dd HH:mm"></fmt:formatDate></td>
+				<td>${item.company }</td>
+				<td>${item.note }</td>
+			</tr>
+			</c:forEach>
+		</tbody>
+	</table>
+</div>
+<ul class="am-pagination am-pagination-right">
+	<li class="am-disabled"><a href="#">&laquo;</a></li>
+	<li class="am-active"><a href="#">1</a></li>
+	<li><a href="#">2</a></li>
+	<li><a href="#">3</a></li>
+	<li><a href="#">4</a></li>
+	<li><a href="#">5</a></li>
+	<li><a href="#">&raquo;</a></li>
+</ul>

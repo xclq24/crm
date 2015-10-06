@@ -1,0 +1,20 @@
+package com.tarena.crm.dao;
+
+import java.util.List;
+
+import com.tarena.crm.entity.Allot;
+
+public interface AllotDao {
+public void save(Allot allot) throws Exception;
+	
+	public void deleteById(int id) throws Exception;
+
+	public List<Allot> findAll() throws Exception;
+
+	public void update(Allot allot) throws Exception;
+
+	public Allot findById(int id) throws Exception;
+	
+	public Allot findByEname(String ename) throws Exception;
+
+}

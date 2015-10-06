@@ -1,0 +1,75 @@
+package com.tarena.crm.test;
+
+import java.sql.Date;
+import java.util.List;
+
+import org.junit.Test;
+
+import com.tarena.crm.dao.impl.AllotDaoImpl;
+import com.tarena.crm.entity.Allot;
+import com.tarena.crm.entity.Customer;
+
+public class AllotDaoTest {
+	private AllotDaoImpl test = new AllotDaoImpl();
+	@Test
+	public void testSave(){
+		Allot a = new Allot();
+		a.setCname("客户");
+		a.setEname("老王");
+		java.util.Date d = new java.util.Date();
+		Date date = new Date(d.getTime());
+		a.setTime(date);
+		try {
+			test.save(a);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testFindAll(){
+		try {
+			List<Allot> list = test.findAll();
+			for(Allot s : list){
+				System.out.println(s);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testDelete(){
+		try {
+			test.deleteById(1);
+			System.out.println("成功");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testUpdate(){
+		try{
+			Allot a = new Allot();
+			a.setCname("修改的老李");
+			a.setEname("老王");
+			a.setId(2);
+			java.util.Date date = new java.util.Date();
+			a.setTime(new Date(date.getTime()));
+			test.update(a);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testFind(){
+		try {
+			Allot a = test.findByEname("老王");
+			System.out.println(a);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

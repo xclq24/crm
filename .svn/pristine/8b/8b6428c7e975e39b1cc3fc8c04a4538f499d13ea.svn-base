@@ -1,0 +1,98 @@
+package com.tarena.crm.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.tarena.crm.dao.DeptDao;
+import com.tarena.crm.dao.RoleDao;
+import com.tarena.crm.dao.UserDao;
+import com.tarena.crm.dao.impl.DeptDaoImpl;
+import com.tarena.crm.dao.impl.RoleDaoImpl;
+import com.tarena.crm.dao.impl.UserDaoImpl;
+import com.tarena.crm.entity.Dept;
+import com.tarena.crm.entity.Role;
+import com.tarena.crm.entity.User;
+import com.tarena.crm.service.UserService;
+
+public class UserServiceImpl implements UserService {
+
+	@Override
+	public User login(User user) throws Exception {
+		UserDao userDao = new UserDaoImpl();
+		User loginUser = userDao.findByUsername(user.getUsername());
+		if (loginUser == null) {
+			return null;
+		}
+		if (loginUser.getPwd().equalsIgnoreCase(user.getPwd())) {
+			return loginUser;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean addEmployee(User user) throws Exception {
+		UserDao userDao = new UserDaoImpl();
+		System.out.println("正在添加");
+		System.out.println(user);
+		if(userDao.findByUsername(user.getUsername())!=null){
+			System.out.println("用户名重复");
+			return false;
+		}else {
+			userDao.save(user);
+			System.out.println("添加成功");
+			return true;
+		}
+	}
+
+	@Override
+	public List<User> EmpList() throws Exception {
+		List<User> users = new ArrayList<User>();
+		UserDao userDao = new UserDaoImpl();
+		try{
+			users = userDao.findAll();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
+	@Override
+	public User FindById(int id) throws Exception {
+		User user = null;
+		try{
+			UserDao userDao = new UserDaoImpl();
+			user = userDao.findById(id);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	@Override
+	public void deleteEmployee(int id) throws Exception {
+		try{
+			UserDao userDao = new UserDaoImpl();
+			userDao.delete(id);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	@Override
+	public void updateEmployee(User user) throws Exception {
+		UserDao userDao = new UserDaoImpl();
+		userDao.update(user);
+	}
+
+	@Override
+	public User FindByName(String name) throws Exception {
+		UserDao userDao = new UserDaoImpl();
+		User user = userDao.findByUsername(name);
+		return user;
+	}
+
+	@Override
+	public void modifyPwd(User user) throws Exception {
+		UserDao userDao = new UserDaoImpl();
+		userDao.modifyPwd(user);
+	}
+}

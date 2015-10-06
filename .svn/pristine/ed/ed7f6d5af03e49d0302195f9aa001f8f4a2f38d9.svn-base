@@ -1,0 +1,22 @@
+package com.tarena.crm.action;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.tarena.minispringmvc.servlet.Action;
+import com.tarena.minispringmvc.servlet.RequestPath;
+
+@Action
+public class BaseAction {
+	@RequestPath(path = "/login.do")
+	public String toLogin(HttpServletRequest request,
+			HttpServletResponse response) {
+		return "/page/login.jsp";
+	}
+
+	@RequestPath(path = "/main.do")
+	public String toMain(HttpServletRequest request,
+			HttpServletResponse response) {
+		return "/page/main.jsp";
+	}
+}

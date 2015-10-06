@@ -1,0 +1,20 @@
+package com.tarena.crm.dao;
+
+import java.util.List;
+
+import com.tarena.crm.entity.Customer;
+
+public interface CustomerDao{
+	public void save(Customer customer) throws Exception;
+	
+	public void deleteById(int id) throws Exception;
+
+	public List<Customer> findAll() throws Exception;
+
+	public void update(Customer customer) throws Exception;
+
+	public Customer findById(int id) throws Exception;
+	
+	public Customer findByname(String name) throws Exception;
+
+}

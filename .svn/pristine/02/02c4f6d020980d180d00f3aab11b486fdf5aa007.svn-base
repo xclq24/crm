@@ -1,0 +1,91 @@
+package com.tarena.crm.dao.impl;
+
+import java.sql.ResultSet;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.tarena.crm.dao.CustomerDao;
+import com.tarena.crm.entity.Customer;
+import com.tarena.db.BaseDao;
+import com.tarena.db.EntityUtils;
+import com.tarena.db.Page;
+
+public class CustomerDaoImpl extends BaseDao<Customer> implements CustomerDao{
+
+	@Override
+	public Customer toEntity(ResultSet rs) throws Exception {
+		Customer customer = new Customer();
+		EntityUtils.fillEntity(rs, customer);
+		return customer;
+	}
+	@Override
+	public void save(Customer customer) throws Exception {
+		update("insert into customer values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+				, customer.toArray());
+	}
+	
+	@Override
+	public List<Customer> findAll() throws Exception {
+		return queryEntity("select c.id,name, source, a.ename, position, type,gender,email," +
+				"birthday,phone,qq,addr,weibo,tel,msn,company,builder,modifier,state,note,createtime,modifytime " +
+				"from customer c LEFT JOIN allot a ON c.name=a.cname", null);
+	}
+
+	@Override
+	public List<Customer> findAll(Page page) throws Exception {
+		Object[] params = {page.getBeginIndex(), page.getEveryPage()};
+		return queryEntity("select c.id,name, source, a.ename, position, type,gender,email," +
+				"birthday,phone,qq,addr,weibo,tel,msn,company,builder,modifier,state,note,createtime,modifytime " +
+				"from customer c LEFT JOIN allot a ON c.name=a.cname limit ?,?", params);
+	}
+
+	@Override
+	public void update(Customer customer) throws Exception {
+		Object[] params = customer.toEditArray();
+		params = ArrayUtils.add(params, new Date());
+		params = ArrayUtils.add(params, customer.getId());
+		update(
+				"update customer set source=?,position=?,type=?,gender=?,email=?,phone=?,qq=?,addr=?,weibo=?,tel=?,msn=?,company=?,modifytime=?,state=? where id = ?",
+				params);
+	}
+
+	@Override
+	public Customer findById(int id) throws Exception {
+		List<Customer> list = queryEntity("select c.id, name, source, a.ename, position, type, gender, email," +
+				"birthday,phone,qq,addr,weibo,tel,msn,company,builder,modifier,state,note,createtime,modifytime " +
+				"from customer c LEFT JOIN allot a ON c.name=a.cname where c.id = ?",
+				new Object[] { id });
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public List<Customer> findByname(String name) throws Exception {
+		return queryEntity("select c.id, name, source, a.ename, position, type, gender, email," +
+				"birthday,phone,qq,addr,weibo,tel,msn,company,builder,modifier,state,note,createtime,modifytime " +
+				"from customer c LEFT JOIN allot a ON c.name=a.cname where name like '%' ? '%'",
+				new Object[] { name });
+	}
+	
+	@Override
+	public void deleteById(int id) throws Exception {
+		update("delete from customer where id = ?", new Object[]{ id });
+	}
+	
+	@Override
+	public List<Customer> findAllot() throws Exception {
+		return queryEntity("select id,name,state,source,type,createtime,company,note " +
+				"from customer where name not in (select cname from allot)", null);
+	}
+	@Override
+	public int count() throws Exception {
+		List<Customer> list = queryEntity("select id from customer", null);
+		int count = list.size();
+		return count;
+	}
+	
+}

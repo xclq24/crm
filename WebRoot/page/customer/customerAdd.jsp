@@ -1,0 +1,127 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<strong class="am-text-primary am-text-lg">客户信息添加</strong>&nbsp;/&nbsp;<small>客户信息</small>&nbsp;/&nbsp;<small>客户相关</small>
+<hr/>
+<form class="am-form am-form-horizontal">
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">*客户姓名：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="customer.name" id="name">
+		</div>
+		<label class="am-u-sm-2 am-form-label">*客户来源：</label>
+		<div class="am-u-sm-4">
+			<select name="customer.source">
+				<c:forEach var="item" items="${sources }">
+					<option <c:if test="${customer.source == item.source }"> selected="seleted"</c:if> value="${item.source }">
+						${item.source }
+					</option>
+				</c:forEach>
+			</select>
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户职位：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="customer.position">
+		</div>
+		<label class="am-u-sm-2 am-form-label">*客户类型：</label>
+		<div class="am-u-sm-4">
+			<select name="customer.type">
+				<c:forEach var="item" items="${types }">
+					<option value="${item.type }" <c:if test="${item.type == customer.type }"> selected="seleted"</c:if>>
+						${item.type }
+					</option>
+				</c:forEach>
+			</select>
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">*性别：</label>
+		<div class="am-u-sm-4">
+			<label class="am-radio-inline">
+				<input type="radio" name="customer.gender" value="男" checked="checked">&nbsp;男
+			</label>
+			<label class="am-radio-inline">
+				<input type="radio" name="customer.gender" value="女">&nbsp;女
+			</label>
+		</div>
+		<label class="am-u-sm-2 am-form-label">Email：</label>
+		<div class="am-u-sm-4">
+			<input type="text" name="customer.email">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">*出生日期：</label>
+		<div class="am-u-sm-4">
+			<input type="text" name="customer.birthday" id="birth" onclick="SelectDate(this,'yyyy\-MM\-dd')">
+		</div>
+		<label class="am-u-sm-2 am-form-label">*客户手机：</label>
+		<div class="am-u-sm-4">
+			<input type="text" name="customer.phone" id="phone">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户QQ：</label>
+		<div class="am-u-sm-4">
+			<input type="text" name="customer.qq">
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户地址：</label>
+		<div class="am-u-sm-4">
+			<input type="text" name="customer.addr">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户微博：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="customer.weibo">
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户座机：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="customer.tel">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户MSN：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="customer.msn">
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户公司：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="customer.company">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">*创建人：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="customer.builder" id="builder">
+		</div>
+		<label class="am-u-sm-2 am-form-label">修改人：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="customer.modifier">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">*客户状态：</label>
+		<div class="am-u-sm-4">
+			<select name="customer.state">
+				<c:forEach var="item" items="${states }">
+					<option value="${item.state }" <c:if test="${item.state == customer.state }"> selected="seleted"</c:if>>
+						${item.state }
+					</option>
+				</c:forEach>
+			</select>
+		</div>
+		<label class="am-u-sm-2 am-form-label">备注：</label>
+		<div class="am-u-sm-4">
+			<input class="am-form-field am-input-sm" type="text" name="customer.note">
+		</div>
+		<div><label class="am-u-sm-2 am-form-label">(带 * 为必填项)</label></div>
+	</div>
+	<div class="am-form-group">
+		<div class="am-u-sm-offset-2 am-u-sm-4">
+			<button type="button" class="am-btn am-btn-primary" onclick="javascript:haha('${pageContext.request.contextPath}/page/customer/customerAdd2.do');">添加</button>
+			<button type="reset" class="am-btn am-btn-default">重置</button>
+			<button type="button" class="am-btn am-btn-default" onclick="javascript:link('${pageContext.request.contextPath}/page/customer/customerList.do');" >返回</button>
+		</div>
+	</div>
+</form>

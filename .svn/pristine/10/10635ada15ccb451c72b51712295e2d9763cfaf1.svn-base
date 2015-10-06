@@ -1,0 +1,22 @@
+package com.tarena.crm.service.impl;
+
+import com.tarena.crm.dao.UserDao;
+import com.tarena.crm.dao.impl.UserDaoImpl;
+import com.tarena.crm.entity.User;
+import com.tarena.crm.service.UserService;
+
+public class UserServiceImpl implements UserService {
+
+	@Override
+	public User login(User user) throws Exception {
+		UserDao userDao = new UserDaoImpl();
+		User loginUser = userDao.findByUsername(user.getUsername());
+		if (loginUser == null) {
+			return null;
+		}
+		if (loginUser.getPwd().equalsIgnoreCase(user.getPwd())) {
+			return loginUser;
+		}
+		return null;
+	}
+}

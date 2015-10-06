@@ -1,0 +1,21 @@
+package com.tarena.crm.service;
+
+import java.util.List;
+
+import com.tarena.crm.entity.Type;
+import com.tarena.db.Page;
+
+public interface TypeService {
+	
+	public List<Type> typeList() throws Exception;
+
+	public List<Type> typeList(Page page) throws Exception;
+	
+	public void typeDel(String id) throws Exception;
+	
+	public void typeAdd(Type type) throws Exception;
+	
+	public List<Type> typeSearch(String type) throws Exception;
+
+	public int findCount() throws Exception;
+}

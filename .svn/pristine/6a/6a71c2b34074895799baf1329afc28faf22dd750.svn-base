@@ -1,0 +1,67 @@
+package com.tarena.crm.dao.impl;
+
+import java.sql.ResultSet;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.tarena.crm.dao.CustomerDao;
+import com.tarena.crm.entity.Customer;
+import com.tarena.db.BaseDao;
+import com.tarena.db.EntityUtils;
+
+public class CustomerDaoImpl extends BaseDao<Customer> implements CustomerDao{
+
+	@Override
+	public Customer toEntity(ResultSet rs) throws Exception {
+		Customer customer = new Customer();
+		EntityUtils.fillEntity(rs, customer);
+		return customer;
+	}
+	@Override
+	public void save(Customer customer) throws Exception {
+		update("insert into customer values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)"
+				, customer.toArray());
+	}
+
+	@Override
+	public List<Customer> findAll() throws Exception {
+		return queryEntity("select * from customer", null);
+	}
+
+	@Override
+	public void update(Customer customer) throws Exception {
+		Object[] params = customer.toArray();
+		params = ArrayUtils.add(params, customer.getId());
+		update(
+				"update customer set name=?,source=?,position=?,type=?,gender=?,email=?,birthday=?,phone=?,qq=?,addr=?,weibo=?,tel=?,msn=?,company=?,builder=?,modifier=?,state=?,note=? where id=?",
+				params);
+	}
+
+	@Override
+	public Customer findById(int id) throws Exception {
+		List<Customer> list = queryEntity("select * from customer where id = ?",
+				new Object[] { id });
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public Customer findByname(String name) throws Exception {
+		List<Customer> list = queryEntity("select * from customer where name = ?",
+				new Object[] { name });
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+	@Override
+	public void deleteById(int id) throws Exception {
+		update("delete from customer where id = ?", new Object[]{ id });
+	}
+	
+	
+	
+}

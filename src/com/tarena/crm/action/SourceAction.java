@@ -1,0 +1,87 @@
+package com.tarena.crm.action;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.tarena.crm.entity.Source;
+import com.tarena.crm.service.SourceService;
+import com.tarena.crm.service.impl.SourceServiceImpl;
+import com.tarena.minispringmvc.servlet.Action;
+import com.tarena.minispringmvc.servlet.EntityUtil;
+import com.tarena.minispringmvc.servlet.RequestPath;
+
+@Action
+public class SourceAction {
+
+	// 客户来源展示
+	@RequestPath(path = "/page/customer/sourceList.do")
+	public void list(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		response.setContentType("text/html;charset=utf-8");
+		List<Source> sources = null;
+		// 搜索路径转发
+		if (request.getAttribute("sources") != null) {
+			sources = (List<Source>) request.getAttribute("sources");
+		} else {
+
+			SourceService sourceService = new SourceServiceImpl();
+			sources = sourceService.sourceList();
+		}
+		request.setAttribute("sources", sources);
+		request.getRequestDispatcher("/page/customer/sourceList.jsp").forward(
+				request, response);
+		return;
+	}
+
+	// 客户来源删除
+	@RequestPath(path = "/page/customer/sourceDel.do")
+	public void delete(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+
+		response.setContentType("text/html;charset=utf-8");
+
+		String id = request.getParameter("id");
+
+		SourceService sourceService = new SourceServiceImpl();
+		sourceService.sourceDel(id);
+		request.getRequestDispatcher("/page/customer/sourceList.do").forward(
+				request, response);
+		return;
+	}
+
+	// 客户来源添加
+	@RequestPath(path = "/page/customer/sourceAdd.do")
+	public void add(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+
+		Source source = (Source)EntityUtil.getObject(request, Source.class, "source");
+		SourceService sourceService = new SourceServiceImpl();
+		sourceService.sourceAdd(source);
+		
+		response.getWriter().println("/crm/page/customer/sourceList.do");
+		return;
+	}
+
+	// 客户来源搜索
+	@RequestPath(path = "/page/customer/sourceSearch.do")
+	public void search(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset=utf-8");
+		String source = request.getParameter("source");
+
+		SourceService sourceService = new SourceServiceImpl();
+		List<Source> sources = sourceService.sourceSearch(source);
+
+		request.setAttribute("sources", sources);
+		request.getRequestDispatcher("/page/customer/sourceList.do").forward(
+				request, response);
+		return;
+
+	}
+}

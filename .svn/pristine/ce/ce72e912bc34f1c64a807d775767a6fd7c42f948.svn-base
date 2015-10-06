@@ -1,0 +1,111 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<strong class="am-text-primary am-text-lg">客户信息详情</strong>&nbsp;/&nbsp;<small>客户信息</small>&nbsp;/&nbsp;<small>客户相关</small>
+<hr/>
+<form class="am-form am-form-horizontal">
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">负责员工：</label>
+		<div class="am-u-sm-4">
+			张三
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户来源：</label>
+		<div class="am-u-sm-4">
+			自己上门
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户姓名：</label>
+		<div class="am-u-sm-4">
+			二傻
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户状态：</label>
+		<div class="am-u-sm-4">
+			潜在客户
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">性别：</label>
+		<div class="am-u-sm-4">
+			女
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户类型：</label>
+		<div class="am-u-sm-4">
+			客户
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">出生日期：</label>
+		<div class="am-u-sm-4">
+			2015-09-09
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户手机：</label>
+		<div class="am-u-sm-4">
+			12344434567
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户QQ：</label>
+		<div class="am-u-sm-4">
+			347827333
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户地址：</label>
+		<div class="am-u-sm-4">
+			重庆三峡
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户邮箱：</label>
+		<div class="am-u-sm-4">
+			2323@qq.com
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户职位：</label>
+		<div class="am-u-sm-4">
+			学生
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户微博：</label>
+		<div class="am-u-sm-4">
+			sadasdasd
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户座机：</label>
+		<div class="am-u-sm-4">
+			9887382
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">客户MSN：</label>
+		<div class="am-u-sm-4">
+			234234234
+		</div>
+		<label class="am-u-sm-2 am-form-label">客户公司：</label>
+		<div class="am-u-sm-4">
+			asdasda
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">创建人：</label>
+		<div class="am-u-sm-4">
+			张三
+		</div>
+		<label class="am-u-sm-2 am-form-label">修改人：</label>
+		<div class="am-u-sm-4">
+			李四
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">创建时间：</label>
+		<div class="am-u-sm-4">
+			2015-08-09 12:34:22.0
+		</div>
+		<label class="am-u-sm-2 am-form-label">修改时间：</label>
+		<div class="am-u-sm-4">
+			2015-08-09 12:34:22.0
+		</div>
+	</div>
+	<div class="am-form-group">
+		<div class="am-u-sm-offset-2 am-u-sm-4">
+			<button type="button" class="am-btn am-btn-default">编辑</button>
+			<button type="button" class="am-btn am-btn-default">返回</button>
+		</div>
+	</div>
+</form>

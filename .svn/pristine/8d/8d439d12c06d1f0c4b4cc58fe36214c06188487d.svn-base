@@ -1,0 +1,7 @@
+package com.tarena.crm.service;
+
+import com.tarena.crm.entity.User;
+
+public interface UserService {
+	public User login(User user) throws Exception;
+}

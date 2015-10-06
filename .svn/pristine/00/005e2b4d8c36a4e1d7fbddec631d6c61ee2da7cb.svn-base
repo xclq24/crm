@@ -1,0 +1,123 @@
+set names utf8;
+DROP DATABASE IF EXISTS db_crm;
+CREATE DATABASE db_crm charset utf8;
+USE db_crm;
+
+select * from house_type;
+drop table dept;
+DROP TABLE IF EXISTS USER;
+CREATE TABLE tb_user (
+	id BIGINT PRIMARY KEY auto_increment,
+	username VARCHAR(50) UNIQUE NOT NULL,
+	password VARCHAR(50) NOT NULL,
+	name VARCHAR(20),
+	birthday DATE
+) engine=InnoDB  charset=utf8;
+CREATE TABLE user (	 /*员工表*/
+	id INT(10) PRIMARY KEY auto_increment,
+	username VARCHAR(20) UNIQUE NOT NULL,
+	pwd VARCHAR(20) NOT NULL,
+	name VARCHAR(20) NOT NULL,
+	age INT(3) NOT NULL,
+	gender CHAR NOT NULL,
+	nation VARCHAR(20) NOT NULL,
+	education VARCHAR(20) NOT NULL,
+	marriage VARCHAR(20) NOT NULL,
+	dept VARCHAR(20) NOT NULL,
+	role VARCHAR(20) NOT NULL,
+	tel VARCHAR(20) NOT NULL,
+	hobby VARCHAR(50) NOT NULL,
+	salary_idcard VARCHAR(20) NOT NULL,
+	phone VARCHAR(20) NOT NULL,
+	idcard VARCHAR(20) NOT NULL,
+	addtime	DATETIME,
+	builder VARCHAR(20) NOT NULL,
+	modifier VARCHAR(20),
+	email VARCHAR(20) NOT NULL,
+	address VARCHAR(20) NOT NULL
+)charset=utf8;
+
+CREATE TABLE role(	/*角色表*/
+	id INT(10) PRIMARY KEY auto_increment,
+	name  VARCHAR(20) NOT NULL UNIQUE,
+	level INT(10) NOT NULL
+)charset=utf8;
+
+CREATE TABLE dept(	/*部门表*/
+	id INT(10) PRIMARY KEY auto_increment,
+	name  VARCHAR(20) NOT NULL UNIQUE,
+	description VARCHAR(50)
+)charset=utf8;
+
+CREATE TABLE house(			/*房屋信息表*/
+	id INT(10) PRIMARY KEY auto_increment,
+	type VARCHAR(20) NOT NULL ,
+	manager	VARCHAR(20) NOT NULL,
+	address	VARCHAR(200) ,
+	price  DOUBLE(8,2)	NOT NULL,
+	environment VARCHAR(200)
+)charset=utf8;
+
+CREATE TABLE house_type(	/*房屋类型表*/
+	id INT(10) PRIMARY KEY auto_increment,
+	name VARCHAR(20) NOT NULL UNIQUE
+)charset=utf8;
+
+CREATE TABLE notice(	/*公告表*/
+	id INT(10) PRIMARY KEY auto_increment,
+	name VARCHAR(20) NOT NULL,
+	theme VARCHAR(20) NOT NULL,
+	time datetime NOT NULL,
+	deadline datetime,
+	message varchar(200) NOT NULL
+)charset=utf8;
+
+CREATE TABLE email(		/*邮件表*/
+	id INT(10) PRIMARY KEY auto_increment,
+	sender VARCHAR(20) NOT NULL,
+	receiver VARCHAR(20) NOT NULL,
+	theme VARCHAR(50),
+	message VARCHAR(200),
+	time datetime NOT NULL
+)charset=utf8;
+
+INSERT INTO user(
+	username,pwd,name,age,gender,nation,education,
+	marriage,dept,role,tel,hobby,salary_idcard,
+	phone,idcard,addtime,builder,modifier,email,address
+) VALUES(
+	'admin','1234','老王',20,'男','汉','本科',
+	'已婚','财务部','管理员','234234234234','玩皮球','123123213123433445',
+	'12333232344','333333333333333333','2013-12-23 23:23',
+	'老王','未修改','776@qq.com','宁波'
+);
+
+INSERT INTO role(	
+	name,level
+)VALUES(
+	'管理员',3
+);
+INSERT INTO dept(	
+	name,description
+)VALUES(
+	'财务部','有钱'
+);
+
+INSERT INTO house(
+	type,manager,address,price,environment
+)VALUES(
+	'两室一厅','老王','三里屯',8888.88,'风水好'
+);
+
+INSERT INTO house_type(name)VALUES('两室一厅');
+
+INSERT INTO notice(
+	name,theme,message,time,deadline
+)VALUES(
+	'李四','最近要开会','记得带钱','2014-09-02 23:34:12','2014-09-03 23:34:12'
+);
+INSERT INTO email(
+	sender,receiver,theme,message,time
+)VALUES(
+	'老王','老李','你好','你好，你大爷','2015-09-10 12:00'
+);

@@ -1,0 +1,70 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<strong class="am-text-primary am-text-lg">联系记录添加</strong>&nbsp;/&nbsp;<small>联系记录</small>&nbsp;/&nbsp;<small>客户相关</small>
+<hr/>
+<form class="am-form am-form-horizontal">
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">
+			客户名称：
+		</label>
+		<div class="am-u-sm-10">
+			<select>
+				<option>华纳</option>
+				<option>华纳</option>
+				<option>华纳</option>
+			</select>
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">
+			联系类型：
+		</label>
+		<div class="am-u-sm-10">
+			<input type="text">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">
+			下次联系时间：
+		</label>
+		<div class="am-u-sm-10">
+			<input type="text">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">
+			是谁联系的：
+		</label>
+		<div class="am-u-sm-10">
+			<input type="text">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">
+			联系主题：
+		</label>
+		<div class="am-u-sm-10">
+			<input type="text">
+		</div>
+	</div>
+	<div class="am-form-group">
+		<label class="am-u-sm-2 am-form-label">
+			联系备注：
+		</label>
+		<div class="am-u-sm-10">
+			<textarea rows="8"></textarea>
+		</div>
+	</div>
+	<div class="am-form-group">
+		<div class="am-u-sm-10 am-u-sm-offset-2">
+			<button type="submit" class="am-btn am-btn-primary">
+				添加
+			</button>
+			<button type="submit" class="am-btn am-btn-default">
+				重置
+			</button>
+			<button type="submit" class="am-btn am-btn-default">
+				返回
+			</button>
+		</div>
+	</div>
+</form>

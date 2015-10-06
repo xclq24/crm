@@ -1,0 +1,14 @@
+set names utf8;
+DROP DATABASE IF EXISTS db_crm;
+CREATE DATABASE db_crm charset utf8;
+USE db_crm;
+
+
+DROP TABLE IF EXISTS USER;
+CREATE TABLE tb_user (
+	id BIGINT PRIMARY KEY auto_increment,
+	username VARCHAR(50) UNIQUE NOT NULL,
+	password VARCHAR(50) NOT NULL,
+	name VARCHAR(20),
+	birthday DATE
+) engine=InnoDB  charset=utf8;

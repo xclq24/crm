@@ -1,0 +1,6 @@
+jdbc.driverName=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/db_crm?useUnicode=true&characterEncoding=utf8
+jdbc.username=root
+jdbc.password=123456
+dbcp.maxActive=1
+dbcp.maxWait=5000

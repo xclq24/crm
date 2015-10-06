@@ -1,0 +1,66 @@
+package com.tarena.crm.entity;
+
+import java.util.Date;
+
+public class Notice {
+	private int id;
+	private String name;
+	private String theme;
+	private Date time;
+	private Date deadline;
+	private String message;
+	
+	public Object[] toArray() {
+		return new Object[]{ name, theme, time, deadline, message };
+	}
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getTheme() {
+		return theme;
+	}
+	public void setTheme(String theme) {
+		this.theme = theme;
+	}
+	
+	public Date getTime() {
+		return time;
+	}
+	public void setTime(Date time) {
+		this.time = time;
+	}
+	
+	public Date getDeadline() {
+		return deadline;
+	}
+	public void setDeadline(Date deadline) {
+		this.deadline = deadline;
+	}
+	
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	@Override
+	public String toString() {
+		return "Notice [id=" + id + ", name=" + name + ", theme=" + theme
+				+ ", time=" + time + ", deadline=" + deadline + ", message="
+				+ message + "]";
+	}
+	
+}

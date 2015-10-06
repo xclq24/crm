@@ -1,0 +1,23 @@
+package com.tarena.crm.dao;
+
+import java.util.List;
+
+import com.tarena.crm.entity.Email;
+
+public interface EmailDao {
+	public void save(Email email) throws Exception;
+
+	public List<Email> findAll() throws Exception;
+	
+	public void update(Email email) throws Exception;
+
+	public Email findById(int id) throws Exception;
+
+	public List<Email> findByMessage(String message) throws Exception;
+
+	public List<Email> findBySender(String sender) throws Exception;
+
+	public List<Email> findByReceiver(String receiver) throws Exception;
+	
+	public void delete(int id) throws Exception;
+}
